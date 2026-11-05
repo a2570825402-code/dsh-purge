@@ -2,12 +2,12 @@
   <img src="docs/banner.svg" alt="dsh-purge" width="720">
 </p>
 
-<h1 align="center">⚔️ DeepSeek Harness 网络安全红队工具（dsh-purge）</h1>
+<h1 align="center">🛡️ dsh-purge Safe Compatibility Edition</h1>
 
-<p align="center"><strong>Version 1.1.90</strong></p>
+<p align="center"><strong>Safe Edition 1.1.91 · DSH 0.2.1-rc.5 target</strong></p>
 
 <p align="center">
-  <em>DeepSeek Harness 破甲：让所有模型都能破甲，不同模型可换不同提示词；默认提示词面向国模「小码酱」。Jailbreak for every model — swap prompts per model. 求 Star 收藏 ⭐ 如要二开，请查看署名要求部分</em>
+  <em>面向 DeepSeek Harness 当前公开预览版的兼容性维护分支。保留上游来源与许可证；默认不宣称绕过平台安全策略或规避检测。</em>
 </p>
 
 <p align="center">
@@ -135,16 +135,19 @@ Harness 不只是把问题交给模型。它还会在运行时改提示词、审
 
 ---
 
-## 适配范围
+## 适配范围（Safe Edition）
 
-**1.1.81 及更高版本适配 DSH 0.2.1-rc.2**，0.2.0 仍可用。不要拿它去打 0.1.x。
+截至 2026-11-05，npm `@deepseek-ai/dsh` 的 `latest` 为 **0.2.1-rc.5**；本分支的兼容性目标锁定为该版本。DSH 仍处于快速迭代的公开预览阶段，宿主升级后请先在独立 profile 验证。
 
-- **dsh 0.2.1-rc.2**（官方桌面 / 官方 `dsh web`）：用 **1.1.81** 或更高。已修 `{{cwd}}` / `[cwd]` 整轮失败、补丁 #40 命中、`toolFilter` 废弃、`dsh-tools` 解析、hostFs fd、桌面换包自杀、`file:` 归档更新、Ctrl+Enter 插话。
-- **dsh 0.2.0-rc.2**：用 **1.1.40** 及以上；本页这档也能装。
-- **dsh 0.1.7**（含 rc.1 / rc.2）：用 **1.1.39** 及更早 —— 在 [Releases](https://github.com/HunYiSage/dsh-purge/releases) 里选对应标签。
-- **不支持 dsh 0.2.1-rc.3 / rc.4 及更新。** 宿主对不上时补丁会显示待应用或跳过，不会乱改文件。请退回 **0.2.1-rc.2** 再用本插件。
+- **目标运行时：** DSH `0.2.1-rc.5`
+- **Node.js：** `^22.19.0 || >=24.0.0`（跟随当前 DSH 运行时要求）
+- **安装面：** 官方 Web / Desktop profile；二者应分别安装并分别验证。
+- **不自动宣称兼容：** DSH `0.2.2` 的 alpha / rc 预览构建，以及未来版本。不要通过放宽版本范围强制加载。
+- **版本不匹配：** 停止应用补丁；先备份 profile，再在测试 profile 核验。不要手动绕过 DSH 的版本保护。
 
-对不上的补丁会显示待应用或跳过，不会乱改文件。
+### 安全边界
+
+此分支的“Safe”指兼容性声明、可回滚维护流程和保守升级策略；它**不代表**已将上游所有提示词、红队/演练功能重写为安全审计工具，也不承诺绕过或关闭 DeepSeek 服务端安全策略。仅在你拥有管理权限的本机 DSH 和授权实验环境使用。若你需要纯粹的安全审计版，应先禁用提示词注入及红队功能，再逐项审查对应实现。
 
 ---
 
@@ -158,7 +161,7 @@ PATH 里有 `dsh`？一条命令、一次重启、一次点击。跑你正在打
 
 ```sh
 # 官方 `dsh web`
-dsh plugin --profile web add https://codeload.github.com/HunYiSage/dsh-purge/tar.gz/refs/heads/master
+dsh plugin --profile web add https://codeload.github.com/a2570825402-code/dsh-purge/tar.gz/refs/heads/safe-edition
 
 # 官方桌面 EXE
 dsh plugin --profile desktop add https://codeload.github.com/HunYiSage/dsh-purge/tar.gz/refs/heads/master
@@ -305,7 +308,7 @@ $cands | Select-Object -Unique | Where-Object { $_ -and (Test-Path (Join-Path $_
 **2. 把插件放到 `$DSH_HOME/plugins/dsh-purge`**（目录名必须是 `dsh-purge`，其 `package.json` 里 `"name"` 也必须是 `dsh-purge`）。
 
 ```sh
-git clone https://github.com/HunYiSage/dsh-purge.git "$DSH_HOME/plugins/dsh-purge"
+git clone https://github.com/a2570825402-code/dsh-purge.git "$DSH_HOME/plugins/dsh-purge"
 ```
 
 没有 git：下载 [master.tar.gz](https://github.com/HunYiSage/dsh-purge/archive/refs/heads/master.tar.gz)，解压后把 `dsh-purge-master` 改名为 `dsh-purge`，整夹放到 `plugins` 下。已有本仓库副本就复制整个目录，不要只拷几个 `.js`。
@@ -593,7 +596,7 @@ flowchart TD
 
 ## 更新
 
-团队频道：[t.me/LLM_PoJia](https://t.me/LLM_PoJia)。有话、有更新会发在那里。GitHub [Releases](https://github.com/HunYiSage/dsh-purge/releases) 仍可下历史包。原版不允许倒卖；二开必须署名。
+团队频道：[t.me/LLM_PoJia](https://t.me/LLM_PoJia)。有话、有更新会发在那里。GitHub [Releases](https://github.com/a2570825402-code/dsh-purge/releases) 仍可下历史包。原版不允许倒卖；二开必须署名。
 
 ## 说明
 
