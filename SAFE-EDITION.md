@@ -51,10 +51,12 @@ Do not delete backup files until the rollback has been verified.
 - This branch does not bypass DeepSeek server-side policy, moderation, account
   controls, or service monitoring. No account-safety or ban-avoidance guarantee
   is possible.
-- The Safe Edition label here means a conservative compatibility target and
-  documented rollback path. It does **not** mean every inherited upstream prompt,
-  red-team preset, or drill feature has been independently rewritten or audited
-  into a benign security scanner. Review and disable any feature you do not need.
+- By default, this branch disables dsh-purge prompt injection, automatic retries,
+  capability protocol injection, anchor takeover, subagent control, and bundled
+  red-team/drill modules; it restores the Harness identity setting.
+- The Safe Edition label does **not** mean inherited upstream code has undergone
+  a complete security audit or been rewritten into a benign security scanner.
+  Do not re-enable features to evade server-side safety controls.
 - Do not use the red-team/drill functionality against public systems or systems
   without explicit authorization.
 
