@@ -6,7 +6,9 @@
   "type": "module",
   "main": "lib/index.js",
   "exports": {
-    ".": { "default": "./lib/index.js" },
+    ".": {
+      "default": "./lib/index.js"
+    },
     "./client": "./client.js",
     "./redteam": "./lib/redteam/index.js",
     "./redteam/store": "./lib/redteam/store.js",
@@ -14,11 +16,23 @@
     "./redteam/tools": "./lib/redteam/tools.js",
     "./package.json": "./package.json"
   },
-  "bin": { "dsh-purge": "bin/dsh-purge.js" },
+  "bin": {
+    "dsh-purge": "bin/dsh-purge.js"
+  },
   "files": [
-    "lib", "!lib/default-prompt-inject.md", "bin", "docs", "presets", "scripts",
-    "client.js", "cordis.patch.yml", "screenshots.json", "README.md",
-    "README.zh-CN.md", "LICENSE", "NOTICE"
+    "lib",
+    "!lib/default-prompt-inject.md",
+    "bin",
+    "docs",
+    "presets",
+    "scripts",
+    "client.js",
+    "cordis.patch.yml",
+    "screenshots.json",
+    "README.md",
+    "README.zh-CN.md",
+    "LICENSE",
+    "NOTICE"
   ],
   "scripts": {
     "embed-prompt": "node scripts/embed-default-prompt.mjs",
@@ -27,17 +41,26 @@
   },
   "license": "Apache-2.0",
   "keywords": [
-    "dsh", "dsh-plugin", "deepseek-harness", "safe-edition",
-    "local-configuration", "reversible-patches", "compatibility"
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "safe-edition",
+    "local-configuration",
+    "reversible-patches",
+    "compatibility"
   ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/a2570825402-code/dsh-purge.git"
   },
   "homepage": "https://github.com/a2570825402-code/dsh-purge#readme",
-  "bugs": { "url": "https://github.com/a2570825402-code/dsh-purge/issues" },
+  "bugs": {
+    "url": "https://github.com/a2570825402-code/dsh-purge/issues"
+  },
   "dsh": {
-    "bundle": { "patch": "./cordis.patch.yml" },
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
     "client": {
       "platform": "web",
       "inject": [
@@ -58,8 +81,16 @@
   },
   "engines": {
     "node": "^22.19.0 || >=24.0.0",
-    "dsh": ">=0.2.1-rc.2 <0.2.3-0"
+    "dsh": "0.2.1-rc.5"
   },
   "dshTarget": "0.2.1-rc.5",
-  "dshTargets": ["0.2.1-rc.5"]
+  "dshTargets": [
+    "0.2.1-rc.5"
+  ],
+  "peerDependencies": {
+    "@deepseek-ai/cordis": "^4.0.1"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
 }
