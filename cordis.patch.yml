@@ -31,12 +31,13 @@
     personaSuffix: ""
 
 # 本体 insert 写在用户层 profile/cordis.patch.yml（postinstall / 演练台自愈补）。
+# Safe Edition：默认关闭提示词注入和红队演练入口。用户完成代码审查后，才可自行在本机 profile 明确启用。
 # 这里只改已入队条目的 inject/config。再 insert 一次会 already queued（#152 / #154 / #159）。
 - id: dsh-purge
   name: dsh-purge
   inject: [systemPrompt, tools]
   config:
-    enabled: true
+    enabled: false
     autoApplyOnStart: false
     autoUpdateOnStart: false
     autoRevertOnMissing: false
@@ -45,27 +46,30 @@
     verbose: false
     postPrompt: ""
     postPromptOrder: 5100
-    autoRetry: true
+    autoRetry: false
     retryMax: 3
     autoContinue: false
     continueMax: 3
     continueText: "继续"
-    capabilityProtocol: true
-    hooksDenyBypass: true
-    anchorMode: auto
-    subagentControl: true
+    capabilityProtocol: false
+    hooksDenyBypass: false
+    anchorMode: off
+    subagentControl: false
 
 - insert:
     # 演练台：预设 + 技能落地（本插件 lib/redteam）
     - id: dsh-purge-redteam
       name: dsh-purge/redteam
+      disabled: true
 
     # 演练台事实库（SQLite），数据在 $DSH_HOME/redteam
     - id: dsh-purge-redteam-store
       name: dsh-purge/redteam/store
+      disabled: true
       config:
         root: !!js dshHomePath('redteam')
 
     # 演练台 HTTP 桥 POST /redteam/api
     - id: dsh-purge-redteam-ui
       name: dsh-purge/redteam/ui
+      disabled: true
