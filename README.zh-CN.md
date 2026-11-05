@@ -75,7 +75,7 @@ Harness 不只是把问题交给模型。它还会在运行时改提示词、审
 | **启动时**          | 自动再检查并应用。npm 升级盖掉 `node_modules` 之后不用手改文件       |
 
 
-不写死盘符。按 `$DSH_HOME`、dsh 启动器旁边的 `.dsh`，再退回 `~/.dsh`。不改 Harness 源码仓库，在 **dsh-purge** 的「清洗」里点「应用」才写入。身份来自插件里的加密提示词，也就是提示词框默认显示的那一份。不读取宿主磁盘上的提示词文件。
+Safe Edition 默认关闭提示词注入与红队演练。安装后先只查看状态和补丁清单；**不要直接点「应用」或运行 `/purge apply`**。只有在你审查过补丁内容、备份 profile 并明确接受变更后，才手动应用。
 
 本插件只处理使用者本机已安装的官方 `@deepseek-ai` 包和本机配置。它不是公网扫描器，也不是针对第三方站点的攻击套件。仓库内不含木马、未授权渗透脚本或对外攻击载荷。
 
@@ -275,7 +275,7 @@ pnpm add https://codeload.github.com/HunYiSage/dsh-purge/tar.gz/refs/heads/maste
 
 当前目录已是本仓库且有 `dsh` 时改用 `dsh plugin --profile web add .`。`dsh` 和 pnpm 都没有再告诉用户后停止。
 
-命令结束后，提醒用户：完全退出并重启 `dsh web`，再点会话标题旁的 **dsh-purge**，在「清洗」里点「应用」。然后停止。
+命令结束后，提醒用户：完全退出并重启 `dsh web`，打开会话标题旁的 **dsh-purge**，只查看状态与补丁清单；不要点击「应用」，不要运行 `/purge apply`。然后停止。
 
 <!-- AI-AGENT-END -->
 
@@ -349,7 +349,7 @@ pnpm install
 
 成功标志：出现 `profiles/<web|desktop>/node_modules/dsh-purge/package.json`。找不到 `pnpm` 就用官方 `dsh` 自带的 Node / pnpm；报 `Could not resolve` 就检查 `file:` 路径；JSON 解析失败就修逗号或还原备份。
 
-**5. 完全退出该宿主，再启动，再点「应用」** —— 即第 3 步和第 4 步。按钮会出现在会话标题旁，只在这个宿主点「应用」（或 `/purge apply`）。没出现多半是改错了另一份 `.dsh`，回到第 1 步核对。
+**5. 完全退出该宿主再启动。** 按钮应出现在会话标题旁。Safe Edition 只要求先检查状态，不要点击「应用」或运行 `/purge apply`。没出现多半是改错了另一份 `.dsh`，回到第 1 步核对。
 
 </details>
 
